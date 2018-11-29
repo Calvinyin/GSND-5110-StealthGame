@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -13,6 +14,7 @@ public class PlayerControler : MonoBehaviour
     public float camRotationLerpSpeed=0.8f;
     public LayerMask terrainLayer;
     public NavMeshAgent agent;
+    public Rigidbody rb;
     public float camHeight = 56f;
 
     [SerializeField]
@@ -48,97 +50,24 @@ public class PlayerControler : MonoBehaviour
     {
         
         UpdateCam();
-
-        Debug.Log(GetComponent<Rigidbody>().velocity.magnitude);
-        
-
         UpdateFlashLight();
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            agent.isStopped = true;
-            speed = Speed.walking;
-        }
-        if (state == State.ClickerCreated)
-        {
-            timer -= Time.deltaTime;
-            if (timer < 0)
-            {
-                DestroyClickerState();
-                Destroy(spawnedClicker);
-                //anim.SetFloat("Forward", Input.GetAxisRaw("Vertical"));
-            }
-        }
-        if (V3Equals(Clicker.transform.position, agent.transform.position))
-        {
-            state = State.ClickerDestroyed;
-            //agent.speed = 8f;
-            agent.speed = 0.1f;
-            anim.SetFloat("Forward", Input.GetAxisRaw("Vertical"));
-            speed = Speed.walking;
-
-        }
-        if (Input.GetMouseButtonDown(0))//Left mouse clicked?
-        {
-            Ray ray = cam.ScreenPointToRay(Input.mousePosition);//take current mouse position and create ray in that direction
-            RaycastHit hit;
-
-            if(Physics.Raycast(ray, out hit,Mathf.Infinity,terrainLayer)/*store ray information in hit*/)//if ray hits something move agent
-            {
-                if (hit.collider.tag != "wall")
-                {
-                    if (hit.collider.tag == "ClickerTag")
-                    {
-                        //agent.speed = 20f;
-                        agent.speed = 2f;
-                        speed = Speed.running;
-                        timer = 0.5f;
-                        hit.transform.GetComponent<WalkMark>().SwitchMark();
-                        //
-                        //
-                        //ADD SOUND HERE
-                        //
-                        //
-                    }
-                    else
-                    {
-                        agent.isStopped = false;
-                        agent.SetDestination(hit.point);
+        float speed = 5f;
+        float v_move = Input.GetAxis("Vertical") * speed * Time.deltaTime;
+        float h_move = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
+        Vector3 movement = new Vector3(h_move, 0, v_move);
+        rb.transform.forward = movement;
+        //Debug.Log(GetComponent<Rigidbody>().velocity.magnitude);
+        rb.MovePosition(rb.position + movement);
+        Debug.Log(Input.GetMouseButtonDown(1));
 
 
-                        if (state == State.ClickerDestroyed)
-                        {
-
-                            state = State.ClickerCreated;
-                            anim.SetFloat("Forward", GetComponent<Rigidbody>().velocity.magnitude);
-                            Clicker.transform.position = hit.point;
-                            spawnedClicker = Instantiate(Clicker);
-                            spawnedClicker.AddComponent<ClickerScript>();
-
-
-                        }
-                        else
-                        {
-                            DestroyClickerState();
-                            Destroy(spawnedClicker);
-                            anim.SetFloat("Forward", GetComponent<Rigidbody>().velocity.magnitude);
-                            state = State.ClickerCreated;
-
-                            Clicker.transform.position = hit.point;
-                            spawnedClicker = Instantiate(Clicker);
-                            spawnedClicker.AddComponent<ClickerScript>();
-                        }
-                    }
-
-                }
-            }
-        }
-	}
+    }
 
     void DestroyClickerState()
     {
         state = State.ClickerDestroyed;
         //agent.speed = 8f;
-        agent.speed = 0.1f;
+        //agent.speed = 0.1f;
         speed = Speed.walking;
         timer = 0.5f;
     }
@@ -147,34 +76,7 @@ public class PlayerControler : MonoBehaviour
     {
         return Vector3.SqrMagnitude(a - b) <= 1;
     }
-    private void OnTriggerEnter(Collider other) {
-      
-        if (other.tag=="XGuide")
-        {
-          
-            camState = 1;
-        }
 
-        if (other.tag=="ZGuide")
-        {
-            
-            camState = 2;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-    
-        if (other.tag=="XGuide")
-        {
-            camState = 0;
-        }
-
-        if (other.tag=="ZGuide")
-        {
-            camState = 0;
-        }
-    }
 
     private void UpdateCam()
     {
@@ -228,7 +130,7 @@ public class PlayerControler : MonoBehaviour
 
     private void UpdateFlashLight()
     {
-        if (Input.GetMouseButtonDown(1)&&!flashLightOn)
+        if (Input.GetMouseButtonDown(1) && !flashLightOn)
         {
             flashLight.enabled = true;
             flashLightOn = true;
