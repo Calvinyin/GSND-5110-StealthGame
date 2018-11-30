@@ -171,16 +171,16 @@
     <None Include="Assets\ThirdPartyAsset\PostProcessing\Resources\Shaders\AmbientOcclusion.cginc" />
     <None Include="Assets\ThirdPartyAsset\PostProcessing\Editor Resources\Monitors\WaveformCompute.compute" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>/Users/calvinyin/Downloads/GameJamStealthGame-master/GameJamStealthGame-master/DarkCity/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>/Users/calvinyin/Documents/GSND-5110-StealthGame/DarkCity/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>/Users/calvinyin/Downloads/GameJamStealthGame-master/GameJamStealthGame-master/DarkCity/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>/Users/calvinyin/Documents/GSND-5110-StealthGame/DarkCity/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>/Users/calvinyin/Downloads/GameJamStealthGame-master/GameJamStealthGame-master/DarkCity/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>/Users/calvinyin/Documents/GSND-5110-StealthGame/DarkCity/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>/Users/calvinyin/Downloads/GameJamStealthGame-master/GameJamStealthGame-master/DarkCity/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>/Users/calvinyin/Documents/GSND-5110-StealthGame/DarkCity/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>/Applications/Unity/Unity.app/Contents/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
