@@ -7,5 +7,6 @@ public class LightCollider : MonoBehaviour {
     void OnTriggerStay(Collider other)
     {
         gameObject.SendMessage("EnemySees");
+        Debug.Log("EnemySees");
     }
 }
