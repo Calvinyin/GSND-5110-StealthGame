@@ -4,9 +4,19 @@ using UnityEngine;
 
 public class LightCollider : MonoBehaviour {
 
-    void OnTriggerStay(Collider other)
+    
+    void OnTriggerEnter(Collider other)
     {
-        gameObject.SendMessage("EnemySees");
-        Debug.Log("EnemySees");
+
+        if (other.tag == "Player")
+        {
+            Debug.Log(other.tag);
+            gameObject.SendMessage("EnemySees");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        gameObject.SendMessage("Disapper");
     }
 }

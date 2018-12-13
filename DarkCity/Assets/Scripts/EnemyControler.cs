@@ -12,61 +12,66 @@ public class EnemyControler : MonoBehaviour {
     public GameObject mark;
     public GameObject canvas;
     State state = State.goingToA;
-    public enum State { goingToA, goingToB, chasing};
+    public enum State { goingToA, goingToB, chasing, waiting, discoverd};
+    Vector3 pa, pb;
 
-    Vector3 pos;
+    private void Start()
+    {
+        pa = pointA.position;
+        pb = pointB.position;
+
+        mark.SetActive(false);
+    }
 
     // Update is called once per frame
-    void Update () {
-        pos = player.transform.position;
-        if (state != State.chasing)
+
+    void FixedUpdate()
+    {
+        
+
+        if (V3Equals(agent.transform.position, pa) && state == State.goingToA)
         {
-            mark.SetActive(false);
-            if (V3Equals(agent.transform.position, pointA.position) && state == State.goingToA)
-            {
-                state = State.goingToB;
-                agent.SetDestination(pointB.position);
-            }
-            if (V3Equals(agent.transform.position, pointB.position) && state == State.goingToB)
-            {
-                state = State.goingToA;
-                agent.SetDestination(pointA.position);
-            }
+            state = State.goingToB;
+            agent.SetDestination(pb);
         }
-        else
+        else if (V3Equals(agent.transform.position, pb) && state == State.goingToB)
         {
-            if(V3Equals(pos,agent.transform.position))
+            state = State.goingToA;
+            agent.SetDestination(pa);
+        }
+        else if (state == State.chasing)
+        {
+            if (V3Equals(player.transform.position, agent.transform.position) )
             {
                 Caught();
             }
             else
             {
-                agent.SetDestination(pos);
+
+                agent.SetDestination(player.transform.position);
             }
         }
 
     }
 
-    
+
 
     void EnemySees()
     {
-        if (state == State.chasing)
-        {
-        }
-        else
-        {
-            state = State.chasing;
-            mark.SetActive(true);
-            agent.SetDestination(pos);
-
-        }
+        state = State.chasing;
+        mark.SetActive(true);
+        agent.speed = 9f;
     }
 
-    IEnumerator Chase()
+    void Disapper()
     {
-        yield return new WaitForSeconds(2);
+        agent.speed = 4f;
+        mark.SetActive(false);
+        state = State.goingToA;
+        agent.SetDestination(pa);
     }
+
+   
 
     void Caught()
     {
@@ -77,4 +82,5 @@ public class EnemyControler : MonoBehaviour {
     {
         return Vector3.SqrMagnitude(a - b) <= 5;
     }
+
 }

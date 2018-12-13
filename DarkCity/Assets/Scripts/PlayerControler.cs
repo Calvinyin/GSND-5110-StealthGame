@@ -16,6 +16,7 @@ public class PlayerControler : MonoBehaviour
     public NavMeshAgent agent;
     public Rigidbody rb;
     public float camHeight = 56f;
+    public Transform roll;
 
     [SerializeField]
     private int camState = 0;
@@ -26,20 +27,14 @@ public class PlayerControler : MonoBehaviour
     public bool flashLightOn = false;
     public float flashLightOnTime = 10f;
 
-
+    public bool isrunning = false;
+    public float speed = 5f;
+    private Vector3 previousforward= new Vector3(0, 0, 0);
 
     public LayerMask _layerMask;
     GameObject spawnedClicker;
-    public enum State { ClickerCreated, ClickerDestroyed };
-    public enum Speed { walking, running };
-
-    Speed speed = Speed.running;
 
     public GameObject Clicker;
-    State state = State.ClickerDestroyed;
-
-    float timer = 0.5f;
-
     private void Awake()
     {
         anim = GetComponent<Animator>();
@@ -51,26 +46,22 @@ public class PlayerControler : MonoBehaviour
         
         UpdateCam();
         UpdateFlashLight();
-        float speed = 5f;
+        UpdateSpeed();
         float v_move = Input.GetAxis("Vertical") * speed * Time.deltaTime;
         float h_move = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
         Vector3 movement = new Vector3(h_move, 0, v_move);
-        rb.transform.forward = movement;
+        if (h_move != 0 || v_move != 0)
+        {
+
+            rb.transform.forward = movement;
+        }
         //Debug.Log(GetComponent<Rigidbody>().velocity.magnitude);
         rb.MovePosition(rb.position + movement);
-        Debug.Log(Input.GetMouseButtonDown(1));
-
-
+        //Debug.Log(Input.GetMouseButtonDown(1));
+        
     }
 
-    void DestroyClickerState()
-    {
-        state = State.ClickerDestroyed;
-        //agent.speed = 8f;
-        //agent.speed = 0.1f;
-        speed = Speed.walking;
-        timer = 0.5f;
-    }
+
 
     bool V3Equals(Vector3 a, Vector3 b)
     {
@@ -130,12 +121,35 @@ public class PlayerControler : MonoBehaviour
 
     private void UpdateFlashLight()
     {
-        if (Input.GetMouseButtonDown(1) && !flashLightOn)
+        if (Input.GetMouseButtonDown(1))
+            if (!flashLightOn)
+            {
+                flashLight.enabled = true;
+                flashLightOn = true;
+                StartCoroutine("ChargeFlashLight");
+            }
+            else
+            {
+                flashLight.enabled = false;
+                flashLightOn = false;
+            }
+    }
+
+    private void UpdateSpeed()
+    {
+        if (Input.GetKey(KeyCode.Space) && !isrunning)
         {
-            flashLight.enabled = true;
-            flashLightOn = true;
-            StartCoroutine("ChargeFlashLight");
+            isrunning = true;
+            speed = 9f;
+            StartCoroutine("Running");
         }
+    }
+
+    IEnumerator Running()
+    {
+        yield return new WaitForSeconds(3);
+        speed = 5f;
+        isrunning = false;
     }
 
     IEnumerator ChargeFlashLight()
@@ -143,6 +157,7 @@ public class PlayerControler : MonoBehaviour
         yield return new WaitForSeconds(flashLightOnTime);
         flashLight.enabled = false;
         flashLightOn = false;
-        
+
     }
+
 }
