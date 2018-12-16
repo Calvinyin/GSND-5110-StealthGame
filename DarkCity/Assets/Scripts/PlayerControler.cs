@@ -127,7 +127,7 @@ public class PlayerControler : MonoBehaviour
 
     private void UpdateFlashLight()
     {
-        if (Input.GetMouseButtonDown(1))
+        if (Input.GetKeyDown(KeyCode.F))
             if (!flashLightOn)
             {
                 flashLight.enabled = true;
@@ -146,7 +146,7 @@ public class PlayerControler : MonoBehaviour
         if (Input.GetKey(KeyCode.Space) && !isrunning)
         {
             isrunning = true;
-            speed = 9f;
+            speed = 10f;
             StartCoroutine("Running");
         }
     }

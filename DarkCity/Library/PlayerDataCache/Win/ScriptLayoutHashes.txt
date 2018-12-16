@@ -1,6 +1,6 @@
 WindowsStandalone
 PlayerPath?
-D:/GSND-5110-StealthGame/DarkCity.exe
+D:/darkcity/DarkCity.exe
 SceneListBegin?
 Assets/Scenes/level0.unity
 SceneListEnd?
@@ -166,6 +166,7 @@ e033f131358cea5a0eabf9561e781deb UnityEngine.TestRunner.dll:UnityEngine.TestTool
 28a95668dd28649297d595834fe8417e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
 28a95668dd28649297d595834fe8417e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSourceExtension
 27cfa34e4f6b20b223c3a7338c780aa2 Assembly-CSharp.dll:.WalkMark
+fdedbe85584f0cd258bf355af2dd779c Assembly-CSharp.dll:.gamestart
 1a90b221dc803408fbafa883c12bcab4 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioListenerExtension
 70f7dc248db3379548a88e8d4fa049f8 UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioRoom
 28a95668dd28649297d595834fe8417e UnityEngine.GoogleAudioSpatializer.dll:UnityEngine.Experimental.Audio.Google.GvrAudioSoundfieldExtension
@@ -187,4 +188,3 @@ f0cb50c0bc7e829e1d1da4c79c4746e6 Assembly-CSharp.dll:DigitalRuby.RainMaker.DemoS
 3e7389754dd08850c75d71aa080a724d Assembly-CSharp.dll:DigitalRuby.RainMaker.DemoScript2D
 93307bd34e39d73fd24e00ec39c25a91 Unity.TextMeshPro.dll:TMPro.TMP_SubMesh
 1991bf1f4a665e8a6e984f9f2a66fe31 Assembly-CSharp.dll:.EnemyControler
-fdedbe85584f0cd258bf355af2dd779c Assembly-CSharp.dll:.gamestart
