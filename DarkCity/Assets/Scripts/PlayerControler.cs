@@ -17,6 +17,7 @@ public class PlayerControler : MonoBehaviour
     public Rigidbody rb;
     public float camHeight = 56f;
     public Transform roll;
+    public AudioClip au;
 
     [SerializeField]
     private int camState = 0;
@@ -50,10 +51,15 @@ public class PlayerControler : MonoBehaviour
         float v_move = Input.GetAxis("Vertical") * speed * Time.deltaTime;
         float h_move = Input.GetAxis("Horizontal") * speed * Time.deltaTime;
         Vector3 movement = new Vector3(h_move, 0, v_move);
+
         if (h_move != 0 || v_move != 0)
         {
-
+            
             rb.transform.forward = movement;
+        }
+        else
+        {
+            
         }
         //Debug.Log(GetComponent<Rigidbody>().velocity.magnitude);
         rb.MovePosition(rb.position + movement);

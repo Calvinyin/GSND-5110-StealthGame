@@ -121,7 +121,8 @@
     <Compile Include="Assets\ThirdPartyAsset\RainMaker\Prefab\RainCollision.cs" />
     <Compile Include="Assets\ThirdPartyAsset\RainMaker\Prefab\RainScript.cs" />
     <Compile Include="Assets\ThirdPartyAsset\RainMaker\Prefab\RainScript2D.cs" />
-    <Compile Include="Assets\UI\SimpleUI.cs" />
+    <Compile Include="Assets\UI\gamestart.cs" />
+    <Compile Include="Assets\UI\reload.cs" />
     <None Include="Assets\ThirdPartyAsset\PostProcessing\Resources\Shaders\DepthOfField.shader" />
     <None Include="Assets\ThirdPartyAsset\PostProcessing\Resources\Shaders\MotionBlur.cginc" />
     <None Include="Assets\ThirdPartyAsset\PostProcessing\Resources\Shaders\Fog.shader" />

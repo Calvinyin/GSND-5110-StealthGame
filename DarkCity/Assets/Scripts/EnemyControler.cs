@@ -14,6 +14,7 @@ public class EnemyControler : MonoBehaviour {
     State state = State.goingToA;
     public enum State { goingToA, goingToB, chasing, waiting, discoverd};
     Vector3 pa, pb;
+    public AudioSource au;
 
     private void Start()
     {
@@ -61,6 +62,7 @@ public class EnemyControler : MonoBehaviour {
         state = State.chasing;
         mark.SetActive(true);
         agent.speed = 9f;
+        au.Play();
     }
 
     void Disapper()

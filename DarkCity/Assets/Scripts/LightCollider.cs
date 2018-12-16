@@ -10,7 +10,6 @@ public class LightCollider : MonoBehaviour {
 
         if (other.tag == "Player")
         {
-            Debug.Log(other.tag);
             gameObject.SendMessage("EnemySees");
         }
     }

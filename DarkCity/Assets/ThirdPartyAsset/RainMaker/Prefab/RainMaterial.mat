@@ -123,7 +123,7 @@ Material:
     - _Mode: 2
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _PointSpotLightMultiplier: 0.31
+    - _PointSpotLightMultiplier: 4
     - _ReflDistort: 0.44
     - _RefrDistort: 0.4
     - _SrcBlend: 5
