@@ -29,7 +29,7 @@ public class EnemyControler : MonoBehaviour {
     void FixedUpdate()
     {
         
-
+        // Set patrol route
         if (V3Equals(agent.transform.position, pa) && state == State.goingToA)
         {
             state = State.goingToB;
@@ -48,9 +48,21 @@ public class EnemyControler : MonoBehaviour {
             }
             else
             {
-
-                agent.SetDestination(player.transform.position);
+                if (Vector3.SqrMagnitude(player.transform.position - agent.transform.position) < 100)
+                {
+                    agent.SetDestination(player.transform.position);
+                }
+                // Always return to the closer point
+                else if (Vector3.SqrMagnitude(agent.transform.position - pa) < Vector3.SqrMagnitude(agent.transform.position - pb))
+                {
+                    ReturnToA();
+                }
+                else
+                {
+                    ReturnToB();
+                }
             }
+
         }
 
     }
@@ -65,12 +77,20 @@ public class EnemyControler : MonoBehaviour {
         au.Play();
     }
 
-    void Disapper()
+    void ReturnToA()
     {
         agent.speed = 4f;
         mark.SetActive(false);
         state = State.goingToA;
         agent.SetDestination(pa);
+    }
+
+    void ReturnToB()
+    {
+        agent.speed = 4f;
+        mark.SetActive(false);
+        state = State.goingToB;
+        agent.SetDestination(pb);
     }
 
    
@@ -82,7 +102,7 @@ public class EnemyControler : MonoBehaviour {
 
     bool V3Equals(Vector3 a, Vector3 b)
     {
-        return Vector3.SqrMagnitude(a - b) <= 5;
+        return Vector3.SqrMagnitude(a - b) <= 3;
     }
 
 }
